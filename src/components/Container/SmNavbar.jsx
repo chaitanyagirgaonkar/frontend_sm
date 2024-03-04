@@ -22,8 +22,8 @@ function SmNavbar() {
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/' smooth="true" duration={500} >Home</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-pdf' smooth="true" duration={500} >Notes</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-project' smooth="true" duration={500} >Project</Link></li>
-                {/* <li className='py-6 text-4xl'><Link onClick={handleClick} to='project' smooth={true} duration={500} >Project</Link></li>
-                <li className='py-6 text-4xl'><Link onClick={handleClick} to='contact' smooth={true} duration={500} >Contact</Link></li> */}
+                <li className='py-6 text-4xl'><Link onClick={handleClick} to='/login' smooth="true" duration={500} >Login</Link></li>
+                <li className='py-6 text-4xl'><Link onClick={handleClick} to='/register' smooth="true" duration={500} >Register</Link></li>
             </ul>
         </div>
     )

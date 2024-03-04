@@ -6,16 +6,19 @@ import { AuthProvider } from './context/AuthProvider'
 import Container from './components/Container/Container.jsx'
 import AllProject from './components/Project/AllProject.jsx'
 import PdfOne from './components/Pdf/PdfOne.jsx'
+import Register from './components/Register.jsx'
+import Login from './components/Login.jsx'
 
 
 function App() {
-
 
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
           <Route path="/container" element={<Container />}>
             <Route path='pdf/:pdfId' element={<PdfOne />} />
             <Route path="all-pdf" element={<AllPdf />} />
