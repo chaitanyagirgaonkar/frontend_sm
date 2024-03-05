@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { SlBookOpen } from "react-icons/sl";
-import { AiOutlineHome } from "react-icons/ai";
+// import { AiOutlineHome } from "react-icons/ai";
 import { Link, useNavigate, Outlet } from "react-router-dom"
-import { GrNotes } from "react-icons/gr";
-import { GoProjectSymlink } from "react-icons/go";
-import { TfiArrowCircleRight, TfiArrowCircleLeft } from "react-icons/tfi";
+// import { GrNotes } from "react-icons/gr";
+// import { GoProjectSymlink } from "react-icons/go";
+// import { TfiArrowCircleRight, TfiArrowCircleLeft } from "react-icons/tfi";
 import Sidebar from './Sidebar.jsx'
 import SmSidebar from './SmSidebar.jsx';
 import useAuth from '../../hooks/useAuth.js';

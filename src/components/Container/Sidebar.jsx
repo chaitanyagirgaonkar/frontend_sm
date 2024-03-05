@@ -5,6 +5,7 @@ import { GrNotes } from "react-icons/gr";
 import { GoProjectSymlink } from "react-icons/go";
 import { TfiArrowCircleRight, TfiArrowCircleLeft } from "react-icons/tfi";
 import useAuth from '../../hooks/useAuth';
+import User from '../User/User';
 
 function Sidebar() {
 
@@ -12,7 +13,7 @@ function Sidebar() {
 
     return (
         <>
-            <div className='bg-white block h-full  w-[20%] pt-3'>
+            <div className='bg-white h-full  w-[20%] pt-3 flex flex-col justify-between '>
 
                 <ul className="flex flex-col max-md:flex-row w-full gap-1">
                     <div className='flex flex-row justify-between  items-center ml-3'>
@@ -54,6 +55,9 @@ function Sidebar() {
                         <div>Project</div>
                     </NavLink>
                 </ul>
+                <div>
+                    <User />
+                </div>
             </div>
 
 

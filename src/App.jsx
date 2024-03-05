@@ -8,7 +8,7 @@ import AllProject from './components/Project/AllProject.jsx'
 import PdfOne from './components/Pdf/PdfOne.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
-
+import RequireAuth from './RequireAuth.jsx'
 
 function App() {
 
@@ -19,13 +19,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path="/container" element={<Container />}>
-            <Route path='pdf/:pdfId' element={<PdfOne />} />
-            <Route path="all-pdf" element={<AllPdf />} />
-            <Route path="all-project" element={<AllProject />} />
 
+          <Route element={<RequireAuth />}>
+            <Route path="/container" element={<Container />}>
+              <Route path='pdf/:pdfId' element={<PdfOne />} />
+              <Route path="all-pdf" element={<AllPdf />} />
+              <Route path="all-project" element={<AllProject />} />
+            </Route>
           </Route>
-
         </Routes>
       </BrowserRouter>
     </AuthProvider>

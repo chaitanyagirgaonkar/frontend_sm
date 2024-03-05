@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-import { SlBookOpen } from "react-icons/sl";
+import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
 import { Link, useNavigate, Outlet, NavLink } from "react-router-dom"
 import { GrNotes } from "react-icons/gr";
 import { GoProjectSymlink } from "react-icons/go";
 import { TfiArrowCircleRight } from "react-icons/tfi";
 import useAuth from '../../hooks/useAuth';
+import User from '../User/User';
 
 function SmSidebar() {
-    const { sidebar, setSidebar } = useAuth()
+    const { sidebar, setSidebar, auth } = useAuth()
+    const [profile, setProfile] = useState(false)
+
+    const handleProfile = () => {
+        const pro = !profile
+        setProfile(pro)
+    }
 
     return (
 
-        <div className='bg-white  h-[100%]  w-[5%] pt-3'>
+        <div className='bg-white  h-[100%]  w-[5%] pt-3 flex flex-col justify-between p-2'>
             <ul className="flex flex-col max-md:flex-row w-full gap-1">
                 <div className='flex flex-col justify-between  items-center gap-2'>
                     <div className='flex flex-col-reverse gap-4'>
@@ -61,6 +68,20 @@ function SmSidebar() {
                     </div>
                 </div>
             </ul>
+            <div className='flex'>
+                {
+                    auth.username &&
+                    <div className='text-blue-500  cursor-pointer hover:bg-[#f5f5f5] rounded-lg flex justify-center items-center ml-1' onClick={handleProfile}>
+                        <FaUserCircle size={34} />
+                    </div>
+                }
+                {
+                    profile &&
+                    <div className=''>
+                        <User />
+                    </div>
+                }
+            </div>
         </div>
 
     )

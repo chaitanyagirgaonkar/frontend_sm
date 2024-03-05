@@ -5,7 +5,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { IoKeyOutline, IoSchoolOutline } from "react-icons/io5";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 
@@ -190,6 +190,7 @@ function Register() {
                             <input
                                 type="password"
                                 placeholder='Password'
+                                autoComplete="current-password"
                                 value={pwd}
                                 required
                                 onChange={(e) => setPwd(e.target.value)}
@@ -234,6 +235,7 @@ function Register() {
                             </div>
                         </div>
                         <button className='bg-blue-700 mt-5 py-4 w-[90%]  text-white rounded-lg hover:bg-blue-800' onClick={handleRegister}>Register</button>
+                        <p >Already have Account <Link to='/login' className='text-blue-500 underline'> Login </Link></p>
                     </div>
                     <Toaster />
                 </form>

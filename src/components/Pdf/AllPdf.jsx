@@ -10,7 +10,7 @@ function AllPdf() {
     useEffect(() => {
         axios.get("/v1/pdfs/")
             .then((res) => {
-                console.log(res.data.data)
+                // console.log(res.data.data)
                 setPdf(res.data.data)
             })
             .catch((err) => {
@@ -31,7 +31,7 @@ function AllPdf() {
             </div>
             <div>
 
-                <div className="grid grid-cols-2 gap-4 ">
+                <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 ">
                     {
                         pdf.map((p, index) =>
                             <PdfCard key={index} p={p} />

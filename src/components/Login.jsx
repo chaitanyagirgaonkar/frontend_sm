@@ -5,12 +5,15 @@ import axios from "axios"
 import React, { useState, useEffect, useRef } from 'react'
 import useAuth from '../hooks/useAuth.js'
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 
 function Login() {
     const { setAuth } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/"
+
     const userRef = useRef()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -36,7 +39,7 @@ function Login() {
             setUsername("")
             setPassword("")
             setTimeout(() => {
-                navigate('/')
+                navigate(from, { replace: true })
             }, 2000);
         } catch (err) {
             if (!err?.response) {
@@ -76,10 +79,12 @@ function Login() {
                         <div className='flex flex-col justify-center  w-[90%]  '>
                             <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}
                                 value={password}
+                                autoComplete="new-password"
                                 required className='cursor-pointer outline-blue-500 px-10 w-[100%] py-3 bg-[#f5f5f5]    rounded-md border border-blue-500' />
                             <IoKeyOutline size={24} className='absolute text-blue-500 ml-2' />
                         </div>
                         <button className='bg-blue-700 mt-5 py-4 w-[90%]  text-white rounded-lg hover:bg-blue-800'>Login</button>
+                        <p >Don't have Account <Link to='/register' className='text-blue-500 underline'> Register </Link></p>
                     </div>
                 </form>
                 <Toaster />
