@@ -1,23 +1,32 @@
-import axios from 'axios'
+// import axios from 'axios'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate.js'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import PdfCard from './PdfCard'
 
 function AllPdf() {
+    const axiosPrivate = useAxiosPrivate()
     const [pdf, setPdf] = useState([])
     const navigate = useNavigate()
+    const location = useLocation
+
     useEffect(() => {
-        axios.get("/v1/pdfs/")
+        axiosPrivate.get("/v1/pdfs/")
             .then((res) => {
-                // console.log(res.data.data)
-                setPdf(res.data.data)
+                if (Array.isArray(res.data.data)) {
+                    setPdf(res.data.data);
+                } else {
+
+                    // Handle the situation where data received is not an array
+                }
             })
             .catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+                navigate('/login', { state: { from: location }, replace: true })
+            });
+    }, []);
 
-    }, [])
 
 
     return (
@@ -32,7 +41,7 @@ function AllPdf() {
             <div>
 
                 <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 ">
-                    {
+                    {pdf &&
                         pdf.map((p, index) =>
                             <PdfCard key={index} p={p} />
                         )

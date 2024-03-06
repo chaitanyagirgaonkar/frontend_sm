@@ -9,6 +9,7 @@ import PdfOne from './components/Pdf/PdfOne.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import RequireAuth from './RequireAuth.jsx'
+import PersistLogin from './components/PersistLogin.jsx'
 
 function App() {
 
@@ -16,17 +17,22 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route element={<PersistLogin />}>
+            <Route path="/" element={<Home />} />
+          </Route>
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
 
-          <Route element={<RequireAuth />}>
-            <Route path="/container" element={<Container />}>
-              <Route path='pdf/:pdfId' element={<PdfOne />} />
-              <Route path="all-pdf" element={<AllPdf />} />
-              <Route path="all-project" element={<AllProject />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route path="/container" element={<Container />}>
+                <Route path='pdf/:pdfId' element={<PdfOne />} />
+                <Route path="all-pdf" element={<AllPdf />} />
+                <Route path="all-project" element={<AllProject />} />
+              </Route>
             </Route>
           </Route>
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>

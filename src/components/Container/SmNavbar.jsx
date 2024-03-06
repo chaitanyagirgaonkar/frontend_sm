@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SlBookOpen } from "react-icons/sl";
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { Link, useNavigate, Outlet } from "react-router-dom"
@@ -12,6 +12,19 @@ function SmNavbar() {
     const [nav, setNav] = useState(false)
     const handleClick = () => setNav(!nav)
     const { auth, setAuth } = useAuth()
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        axios.get('/v1/users/current-user')
+            .then((res) => {
+                // const username = res.data.data.username
+                setUser(res.data.data)
+                // setAuth({ username: username })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
 
     const handleLogout = () => {
         axios.post('/v1/users/logout')
@@ -29,10 +42,10 @@ function SmNavbar() {
                 <SlBookOpen className="text-2xl text-blue-500 mt-1" />
                 <h1 className='text-blue-500 text-2xl font-semibold'>EduScribe</h1>
             </div>
-            {auth?.username &&
+            {user?.username &&
                 <div className='flex gap-1'>
                     <FaUserCircle size={32} className="text-blue-500" />
-                    <h1 className=' text-xl '>{auth.username}</h1>
+                    <h1 className=' text-xl '>{user.username}</h1>
                 </div>
             }
 
@@ -44,7 +57,7 @@ function SmNavbar() {
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/' smooth="true" duration={500} >Home</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-pdf' smooth="true" duration={500} >Notes</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-project' smooth="true" duration={500} >Project</Link></li>
-                {auth?.username
+                {user?.username
                     ? <li className='py-6 text-4xl' onClick={handleLogout}> Logout </li>
                     :
                     <>

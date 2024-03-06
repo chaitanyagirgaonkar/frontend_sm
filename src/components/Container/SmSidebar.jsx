@@ -70,7 +70,7 @@ function SmSidebar() {
             </ul>
             <div className='flex'>
                 {
-                    auth.username &&
+                    auth.accessToken &&
                     <div className='text-blue-500  cursor-pointer hover:bg-[#f5f5f5] rounded-lg flex justify-center items-center ml-1' onClick={handleProfile}>
                         <FaUserCircle size={34} />
                     </div>

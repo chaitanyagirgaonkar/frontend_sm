@@ -7,10 +7,26 @@ import SmNavbar from '../Container/SmNavbar';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaUserCircle } from "react-icons/fa";
 import useAuth from '../../hooks/useAuth.js'
+import { useState, useEffect } from 'react';
+import axios from "axios"
 
 function Home() {
     const { auth } = useAuth()
     const navigate = useNavigate()
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        axios.get('/v1/users/current-user')
+            .then((res) => {
+
+                setUser(res.data.data)
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
+
     return (
         <div className='w-full max-h-screen overflow-hidden'>
             <div className='flex  justify-between items-center sm:p-5  sm:pl-10 sm:pr-10 pl-0 pt-4'>
@@ -30,10 +46,10 @@ function Home() {
                 </div>
                 <div className='sm:flex gap-3 hidden '>
                     {
-                        auth?.username ?
+                        user?.username ?
                             <>
                                 <FaUserCircle size={32} className="text-blue-500" />
-                                <h1 className=' text-xl '>{auth.username}</h1>
+                                <h1 className=' text-xl '>{user.username}</h1>
                             </>
                             :
                             (
