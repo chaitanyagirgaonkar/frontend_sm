@@ -1,18 +1,19 @@
 import { FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import axios from 'axios'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useRefreshToken from "../../hooks/useRefreshToken";
+import useLogout from "../../hooks/useLogout";
 
 function User() {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
-    const { setAuth } = useAuth()
     const axiosPrivate = useAxiosPrivate();
-    const refresh = useRefreshToken()
+
+
     const location = useLocation()
+    const logout = useLogout()
+
     useEffect(() => {
         axiosPrivate.get('/v1/users/current-user')
             .then((res) => {
@@ -26,14 +27,9 @@ function User() {
             })
     }, [])
 
-    const handleLogout = () => {
-        axios.post('/v1/users/logout')
-            .then((res) => {
-                setAuth({})
-                // console.log(res);
-                navigate('/')
-            })
-            .catch((err) => (console.log(err)))
+    const handleLogout = async () => {
+        await logout()
+
     }
 
     return (

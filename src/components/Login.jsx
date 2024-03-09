@@ -34,7 +34,7 @@ function Login() {
             )
             // console.log(response.data)
             const accessToken = response?.data?.accessToken;
-            setAuth({ username, password, accessToken })
+            setAuth({ username, accessToken })
             toast.success("User Login Successfully !")
             setUsername("")
             setPassword("")
@@ -53,6 +53,8 @@ function Login() {
             }
         }
     }
+
+
 
     return (
         <div className='w-screen h-screen bg-[#f5f5f5] flex justify-center items-center sm:p-10 p-0 '>
@@ -84,6 +86,7 @@ function Login() {
                             <IoKeyOutline size={24} className='absolute text-blue-500 ml-2' />
                         </div>
                         <button className='bg-blue-700 mt-5 py-4 w-[90%]  text-white rounded-lg hover:bg-blue-800'>Login</button>
+
                         <p >Don't have Account <Link to='/register' className='text-blue-500 underline'> Register </Link></p>
                     </div>
                 </form>

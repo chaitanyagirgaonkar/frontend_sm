@@ -7,7 +7,7 @@ function pdfCard({ p }) {
     const navigate = useNavigate()
 
     return (
-        <div className=' flex  bg-white flex-col  sm:gap-4 gap-2 rounded-lg w-full sm:px-6 sm:py-6 px-3 py-3'>
+        <div className=' flex  bg-white flex-col  sm:gap-4 gap-2 rounded-lg w-full sm:px-6 sm:py-6 shadow-md px-3 py-3'>
 
             <div className=' grid grid-cols-[auto_1fr]  sm:gap-6 gap-3 justify-center cursor-pointer '>
                 <img src={p?.coverImage?.url}

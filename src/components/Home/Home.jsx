@@ -42,6 +42,7 @@ function Home() {
                         <li className='cursor-pointer'><Link to='/'>Home</Link></li>
                         <li className='cursor-pointer'><Link to='/container/all-pdf'>Notes</Link></li>
                         <li className='cursor-pointer'><Link to="/container/all-project">Project</Link></li>
+                        <li className='cursor-pointer'><Link to="/container/dashboard">Dashboard</Link></li>
                     </ul>
                 </div>
                 <div className='sm:flex gap-3 hidden '>

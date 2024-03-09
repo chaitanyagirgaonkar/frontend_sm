@@ -10,6 +10,10 @@ import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import RequireAuth from './RequireAuth.jsx'
 import PersistLogin from './components/PersistLogin.jsx'
+import Dashboard from './components/Dashboard/Dashboard.jsx'
+import UserPdf from './components/Dashboard/UserPdf.jsx'
+import UserProject from "./components/Dashboard/UserProject.jsx"
+import UpdateUser from "./components/Dashboard/UpdateUser"
 
 function App() {
 
@@ -29,6 +33,11 @@ function App() {
                 <Route path='pdf/:pdfId' element={<PdfOne />} />
                 <Route path="all-pdf" element={<AllPdf />} />
                 <Route path="all-project" element={<AllProject />} />
+                <Route path="dashboard" element={<Dashboard />} >
+                  <Route index element={<UserPdf />} />
+                  <Route path='user-project' element={<UserProject />} />
+                  <Route path='update-user' element={<UpdateUser />} />
+                </Route>
               </Route>
             </Route>
           </Route>

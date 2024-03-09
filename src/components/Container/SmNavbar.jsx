@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { SlBookOpen } from "react-icons/sl";
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { Link, useNavigate, Outlet } from "react-router-dom"
-import useAuth from '../../hooks/useAuth.js'
 import axios from 'axios'
 import { FaUserCircle } from "react-icons/fa";
-
+import useLogout from '../../hooks/useLogout.js';
 
 function SmNavbar() {
     const navigate = useNavigate()
     const [nav, setNav] = useState(false)
     const handleClick = () => setNav(!nav)
-    const { auth, setAuth } = useAuth()
     const [user, setUser] = useState()
+    const logout = useLogout()
 
     useEffect(() => {
         axios.get('/v1/users/current-user')
@@ -26,14 +25,10 @@ function SmNavbar() {
             })
     }, [])
 
-    const handleLogout = () => {
-        axios.post('/v1/users/logout')
-            .then((res) => {
-                setAuth({})
-                // console.log(res);
-                navigate('/')
-            })
-            .catch((err) => (console.log(err)))
+    const handleLogout = async () => {
+        await logout()
+        setUser("")
+        // navigate("/")
     }
 
     return (

@@ -33,6 +33,7 @@ function PdfOne() {
                         <h1> <span className='text-lg font-semibold text-black'>Description :</span>{pdf?.description}</h1>
                         <h1> <span className='text-lg font-semibold text-black'>Subject : </span>{pdf?.subject}</h1>
                         <h1> <span className='text-lg font-semibold text-black'>Semester :</span> {`${pdf?.semester}`}</h1>
+                        <h1> <span className='text-lg font-semibold text-black'>Owner :</span> {`${pdf?.owner}`}</h1>
                     </div>
                     <div className=' flex items-center justify-center'>
                         <button className='bg-blue-500 text-white px-3 py-2 rounded-md '>Download</button>

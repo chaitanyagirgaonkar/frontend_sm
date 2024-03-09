@@ -6,6 +6,7 @@ import { GoProjectSymlink } from "react-icons/go";
 import { TfiArrowCircleRight, TfiArrowCircleLeft } from "react-icons/tfi";
 import useAuth from '../../hooks/useAuth';
 import User from '../User/User';
+import { FaRegUser } from "react-icons/fa6";
 
 function Sidebar() {
 
@@ -33,6 +34,17 @@ function Sidebar() {
 
                         </div>
                     </div>
+                    <NavLink
+                        to={"/container/dashboard"}
+                        className={({ isActive }) => `${isActive && "text-blue-500 bg-[#f5f5f5]"}   hover:text-blue-500 " hover:bg-[#f5f5f5] cursor-pointer grid grid-cols-[auto_1fr] gap-4 px-4 py-2  font-semibold ml-4 mr-6  mt-1 rounded-lg`}
+                    >
+
+                        <div className=" flex  items-center ">
+                            {" "}
+                            <FaRegUser size={22} className="" />
+                        </div>
+                        <div> Dashboard</div>
+                    </NavLink>
                     <NavLink
                         to={"/container/all-pdf"}
                         className={({ isActive }) => `${isActive && "text-blue-500 bg-[#f5f5f5]"}   hover:text-blue-500 " hover:bg-[#f5f5f5] cursor-pointer grid grid-cols-[auto_1fr] gap-4 px-4 py-2  font-semibold ml-4 mr-6  mt-1 rounded-lg`}
