@@ -13,7 +13,7 @@ import PersistLogin from './components/PersistLogin.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import UserPdf from './components/Dashboard/UserPdf.jsx'
 import UserProject from "./components/Dashboard/UserProject.jsx"
-import UpdateUser from "./components/Dashboard/UpdateUser"
+
 
 function App() {
 
@@ -36,7 +36,6 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />} >
                   <Route index element={<UserPdf />} />
                   <Route path='user-project' element={<UserProject />} />
-                  <Route path='update-user' element={<UpdateUser />} />
                 </Route>
               </Route>
             </Route>

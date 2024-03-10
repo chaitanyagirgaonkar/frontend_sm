@@ -1,15 +1,14 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
-import toast, { Toaster } from 'react-hot-toast';
+import axios from "axios"
 
-function AddPdf({ onHandleAddNote, onPdfAdded }) {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [subject, setSubject] = useState("");
-    const [semester, setSemester] = useState("");
+function EditPdf({ onHandleEditNote, pdfId, pdfDetails, onHandleEditPdf }) {
+    const [title, setTitle] = useState(pdfDetails?.title);
+    const [description, setDescription] = useState(pdfDetails?.description);
+    const [subject, setSubject] = useState(pdfDetails?.subject);
+    const [semester, setSemester] = useState(pdfDetails?.semester);
     const [thumbnail, setThumbnail] = useState(null);
-    const [pdfFile, setPdfFile] = useState(null);
+    const [pdf, setPdf] = useState()
 
 
     const handleSubmit = async (e) => {
@@ -20,16 +19,18 @@ function AddPdf({ onHandleAddNote, onPdfAdded }) {
         formData.append("subject", subject)
         formData.append("semester", semester)
         formData.append("coverImage", thumbnail)
-        formData.append("pdfFile", pdfFile)
+
         try {
-            const res = await axios.post("/v1/pdfs/create", formData,
+            const res = await axios.patch(`/v1/pdfs/${pdfId}`, formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" }
                 })
-            console.log(res)
-            onHandleAddNote(a)
-            onPdfAdded(res.data.data)
-            toast.success("Note Added Successfully !")
+            console.log(res.data.data)
+            setPdf(res.data.data)
+
+            onHandleEditPdf();
+
+            onHandleEditNote(a)
         } catch (err) {
             console.log(err);
         }
@@ -37,14 +38,13 @@ function AddPdf({ onHandleAddNote, onPdfAdded }) {
 
 
 
-
-    const a = false;
+    const a = false
     return (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-gray-600 bg-opacity-60 backdrop-filter backdrop-blur-lg">
             <div className="relative w-[90%] md:w-[50%] bg-white rounded-md " >
                 <div className='flex justify-between items-center p-2'>
-                    <h1 className='font-bold text-xl text-blue-500'>AddNote</h1>
-                    <IoMdClose size={40} className="hover:bg-[#f5f5f5] cursor-pointer p-2 rounded-full" onClick={() => onHandleAddNote(a)} />
+                    <h1 className='font-bold text-xl text-blue-500'>EditNote</h1>
+                    <IoMdClose size={40} className="hover:bg-[#f5f5f5] cursor-pointer p-2 rounded-full" onClick={() => onHandleEditNote(a)} />
                 </div>
                 <hr />
                 <div>
@@ -110,27 +110,17 @@ function AddPdf({ onHandleAddNote, onPdfAdded }) {
                                     onChange={(e) => { setThumbnail(e.target.files[0]) }}
                                 />
                             </div>
-                            <div className="flex flex-col">
-                                <label className="">Pdf File</label>
-                                <input
-                                    type="file"
-                                    className="border border-gray-300 rounded-md px-2 py-1  focus:outline-none placeholder:text-sm placeholder:text-gray-400"
-                                    placeholder="Upload a pdf file"
-                                    required
-                                    accept='application/pdf'
-                                    onChange={(e) => setPdfFile(e.target.files[0])}
-                                />
-                            </div>
                             <div className='mx-auto'>
                                 <button className='bg-blue-500 px-6 py-2 rounded-lg shadow-lg text-white hover:bg-blue-700'>Submit</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
-                <Toaster />
             </div>
         </div>
+
     )
 }
 
-export default AddPdf
+export default EditPdf

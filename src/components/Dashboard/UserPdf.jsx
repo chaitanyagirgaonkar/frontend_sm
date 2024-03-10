@@ -11,6 +11,7 @@ function UserPdf() {
     const [pdf, setPdf] = useState([]);
     const location = useLocation();
     const [AddNote, setAddNote] = useState(false)
+    const [editPdf, setEditPdf] = useState(true)
 
     useEffect(() => {
         axiosPrivate
@@ -24,7 +25,7 @@ function UserPdf() {
                 console.log(err);
                 navigate('/login', { state: { from: location }, replace: true });
             });
-    }, []);
+    }, [editPdf]);
 
     const handleDeletePdf = (pdfId) => {
         setPdf(pdf.filter((p) => p._id !== pdfId));
@@ -33,7 +34,14 @@ function UserPdf() {
     const handleAddNote = (fal) => {
         setAddNote(fal)
     }
+    const handlePdfAdded = (newPdf) => {
 
+        setPdf([...pdf, newPdf]);
+    };
+
+    const handleEditPdf = () => {
+        setEditPdf(prev => !prev)
+    };
     return (
         <div>
             <div className="bg-white flex justify-end items-end pt-3 pr-3">
@@ -41,13 +49,13 @@ function UserPdf() {
             </div>
             <div className="grid sm:grid-cols-4 grid-cols-1 gap-2 bg-white p-5 ">
                 {pdf.map((p, index) => (
-                    <DashboardPdfCard key={index} p={p} onDeletePdf={handleDeletePdf} />
+                    <DashboardPdfCard key={index} p={p} onDeletePdf={handleDeletePdf} onEditPdf={handleEditPdf} />
                 ))}
             </div>
 
             {
                 AddNote &&
-                <AddPdf onHandleAddNote={handleAddNote} />
+                <AddPdf onHandleAddNote={handleAddNote} onPdfAdded={handlePdfAdded} />
             }
         </div>
     );
