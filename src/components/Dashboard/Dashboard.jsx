@@ -25,16 +25,14 @@ function Dashboard() {
             })
     }, [])
 
-    const updateUser = () => {
-        navigate("/container/dashboard/update-user")
-    }
+
 
     return (
         <div className=' rounded-lg bg-[#f5f5f5] h-screen p-5'>
             <div className='  rouded-lg  flex flex-col gap-5'>
                 <div className='p-3 bg-white rounded-lg shadow-sm flex  justify-between'>
-                    <div className='flex gap-10 items-center'>
-                        <div >
+                    <div className='flex sm:flex-row flex-col sm:gap-10 gap-5 sm:items-center items-start'>
+                        <div className=''>
 
                             <FaUserCircle size={100} className="text-blue-500" />
 
@@ -46,9 +44,7 @@ function Dashboard() {
                             <p> 0 Notes 0 Projects</p>
                         </div>
                     </div>
-                    {/* <div className='text-blue-500 cursor-pointer' onClick={updateUser}>
-                        <FaEdit size={24} />
-                    </div> */}
+
                 </div>
                 <div className=' flex flex-col'>
                     <div className='p-5 rounded-lg bg-white'>

@@ -10,6 +10,15 @@ function AllPdf() {
     const [pdf, setPdf] = useState([])
     const navigate = useNavigate()
     const location = useLocation
+    const [searchTerm, setSearchTerm] = useState('')
+    const [semester, setSemester] = useState()
+
+
+    const filteredProducts = pdf.filter(pdf =>
+        (pdf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            pdf.subject.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (!semester || pdf.semester === parseInt(semester))
+    )
 
     useEffect(() => {
         axiosPrivate.get("/v1/pdfs/")
@@ -31,18 +40,35 @@ function AllPdf() {
 
     return (
         <div className=' rounded-lg bg-[#f5f5f5] p-5'>
-            <div className=' flex justify-between items-center bg-white mb-3 rounded-lg h-12 p-5'>
+            <div className=' flex justify-between items-center bg-white mb-3 rounded-lg h-12 p-5  '>
                 <h1 className='text-blue-500 text-lg font-semibold'>Note's</h1>
-                <input type="text"
-                    className='w-1/3 border border-blue-500 p-1 rounded-md'
-                    placeholder='Search...'
-                />
+                <div className='flex gap-5 justify-end w-full'>
+                    <select
+                        className="border border-gray-300 rounded-md px-2 py-1 outline-blue-500 focus:outline-none placeholder:text-sm placeholder:text-gray-400"
+                        onChange={(e) => setSemester(e.target.value)}
+                        value={semester}
+                    >
+                        <option value="">Select Semester</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
+                    <input type="text"
+                        className='w-[25%] border border-blue-500 p-1 rounded-md'
+                        placeholder='Search with subject name or title..'
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
             </div>
             <div>
 
                 <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 ">
                     {pdf &&
-                        pdf.map((p, index) =>
+                        filteredProducts.map((p, index) =>
                             <PdfCard key={index} p={p} />
                         )
                     }

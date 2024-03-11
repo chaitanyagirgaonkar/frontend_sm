@@ -1,10 +1,15 @@
-
 import React from 'react'
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import useDownloadPdf from '../../hooks/useDownloadPdf'
 
 function pdfCard({ p }) {
-    const pdfId = useParams()
+
     const navigate = useNavigate()
+
+
+    const handleDownload = (pdfUrl) => {
+        useDownloadPdf(pdfUrl)
+    }
 
     return (
         <div className=' flex  bg-white flex-col  sm:gap-4 gap-2 rounded-lg w-full sm:px-6 sm:py-6 shadow-md px-3 py-3'>
@@ -25,7 +30,8 @@ function pdfCard({ p }) {
 
                         <button className='bg-blue-500 px-3 py-2 rounded-md text-white' onClick={() => navigate(`/container/pdf/${p._id}`)}>View Pdf</button>
 
-                        <button className='bg-white hover:bg-blue-500 hover:text-white border border-blue-500 text-blue-500 px-2 py-2 rounded-md'>Download</button>
+                        <button className='bg-white hover:bg-blue-500 hover:text-white border border-blue-500 text-blue-500 px-2 py-2 rounded-md' onClick={() => handleDownload(p?.pdfFile.url)}>Download</button>
+
                     </div>
                 </div>
 

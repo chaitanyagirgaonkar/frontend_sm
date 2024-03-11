@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import '../../App.css'
+import useDownloadPdf from '../../hooks/useDownloadPdf'
 
 function PdfOne() {
     const { pdfId } = useParams()
@@ -18,6 +19,11 @@ function PdfOne() {
                 console.log(err);
             })
     }, [])
+
+    const handleDownload = (pdfUrl) => {
+        useDownloadPdf(pdfUrl)
+    }
+
     return (
         <div className='bg-[#f5f5f5] p-5'>
             <div className='grid sm:grid-cols-2 grid-cols-1 justify-between bg-white flex-row rounded-lg w-full sm:p-8 p-3 sm:gap-0 gap-5'>
@@ -36,7 +42,7 @@ function PdfOne() {
                         <h1> <span className='text-lg font-semibold text-black'>Owner :</span> {`${pdf?.owner}`}</h1>
                     </div>
                     <div className=' flex items-center justify-center'>
-                        <button className='bg-blue-500 text-white px-3 py-2 rounded-md '>Download</button>
+                        <button className='bg-blue-500 text-white px-3 py-2 rounded-md ' onClick={() => handleDownload(pdf?.pdfFile?.url)}>Download</button>
                     </div>
                 </div>
             </div>

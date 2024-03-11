@@ -50,6 +50,7 @@ function SmNavbar() {
 
             <ul className={!nav ? 'hidden' : '  absolute top-0 left-0 w-full h-screen bg-blue-300 flex flex-col justify-center items-center'}>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/' smooth="true" duration={500} >Home</Link></li>
+                <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/dashboard' smooth="true" duration={500} >Dashboard</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-pdf' smooth="true" duration={500} >Notes</Link></li>
                 <li className='py-6 text-4xl'><Link onClick={handleClick} to='/container/all-project' smooth="true" duration={500} >Project</Link></li>
                 {user?.username

@@ -4,10 +4,13 @@ import { MdDeleteOutline } from 'react-icons/md';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import EditPdf from './EditPdf';
+import ViewPdf from './ViewPdf';
+
 
 function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
 
     const [editPdf, setEditPdf] = useState(false)
+    const [viewPdf, setViewPdf] = useState(false)
 
     const handleDelete = async (pdfId) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this Note?');
@@ -29,6 +32,9 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
         setEditPdf(false);
     };
 
+    const handleViewNote = () => {
+        setViewPdf(false)
+    }
     const pdfDetails = {
         title: p?.title,
         description: p?.description,
@@ -52,7 +58,7 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
                     <FaEdit size={30} className="cursor-pointer" onClick={() => setEditPdf(true)} />
                 </div>
                 <div>
-                    <FaEye size={30} className="cursor-pointer" />
+                    <FaEye size={30} className="cursor-pointer" onClick={() => setViewPdf(true)} />
                 </div>
                 <div>
                     <MdDeleteOutline size={30} className="cursor-pointer" onClick={() => handleDelete(p?._id)} />
@@ -62,6 +68,10 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
             {
                 editPdf &&
                 <EditPdf onHandleEditNote={handleEditNote} pdfId={p?._id} pdfDetails={pdfDetails} onHandleEditPdf={handleEditPdf} />
+            }
+            {
+                viewPdf &&
+                <ViewPdf pdfId={p?._id} onHandleViewNote={handleViewNote} />
             }
         </div>
     );
