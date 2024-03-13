@@ -24,7 +24,7 @@ function ViewPdf({ pdfId, onHandleViewNote }) {
     }, [])
     return (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-gray-600 bg-opacity-60 backdrop-filter backdrop-blur-lg">
-            <div className="relative w-[95%]  bg-white rounded-md " >
+            <div className="relative w-[80%]  bg-white rounded-md " >
                 <div className='flex justify-between items-center p-2'>
                     <FaArrowLeft size={40} className="hover:bg-[#f5f5f5] cursor-pointer p-2 rounded-full" onClick={() => onHandleViewNote()} />
                 </div>
@@ -41,7 +41,8 @@ function ViewPdf({ pdfId, onHandleViewNote }) {
                             <h1> <span className='text-lg font-semibold text-black'>Description :</span>{pdf?.description}</h1>
                             <h1> <span className='text-lg font-semibold text-black'>Subject : </span>{pdf?.subject}</h1>
                             <h1> <span className='text-lg font-semibold text-black'>Semester :</span> {`${pdf?.semester}`}</h1>
-                            <h1> <span className='text-lg font-semibold text-black'>Owner :</span> {`${pdf?.owner}`}</h1>
+                            <h1> <span className='text-lg font-semibold text-black'>Upload By :</span> {`${pdf?.uploadBy}`}</h1>
+
                         </div>
                         <div className=' flex items-center justify-center'>
                             <button className='bg-blue-500 text-white px-3 py-2 rounded-md ' onClick={() => handleDownload(pdf?.pdfFile?.url)}>Download</button>

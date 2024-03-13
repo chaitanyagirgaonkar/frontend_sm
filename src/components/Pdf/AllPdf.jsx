@@ -40,9 +40,9 @@ function AllPdf() {
 
     return (
         <div className=' rounded-lg bg-[#f5f5f5] p-5'>
-            <div className=' flex justify-between items-center bg-white mb-3 rounded-lg h-12 p-5  '>
+            <div className=' flex justify-between items-center gap-5 bg-white mb-3 rounded-lg   p-3  '>
                 <h1 className='text-blue-500 text-lg font-semibold'>Note's</h1>
-                <div className='flex gap-5 justify-end w-full'>
+                <div className='flex sm:flex-row flex-col gap-5 justify-end w-full'>
                     <select
                         className="border border-gray-300 rounded-md px-2 py-1 outline-blue-500 focus:outline-none placeholder:text-sm placeholder:text-gray-400"
                         onChange={(e) => setSemester(e.target.value)}
@@ -57,8 +57,8 @@ function AllPdf() {
                         <option>6</option>
                     </select>
                     <input type="text"
-                        className='w-[25%] border border-blue-500 p-1 rounded-md'
-                        placeholder='Search with subject name or title..'
+                        className='sm:w-[25%] border border-blue-500 p-1 rounded-md px-5'
+                        placeholder='Search with subject or title..'
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />

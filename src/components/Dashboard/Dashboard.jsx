@@ -4,6 +4,7 @@ import { useNavigate, useLocation, Outlet, Link } from "react-router-dom"
 import axios from "axios"
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { FaEdit } from "react-icons/fa";
+import useAuth from '../../hooks/useAuth';
 
 function Dashboard() {
     const [user, setUser] = useState()
@@ -11,12 +12,15 @@ function Dashboard() {
     const axiosPrivate = useAxiosPrivate()
     const [pdf, setPdf] = useState([])
     const location = useLocation
+    const { changeUserDetails } = useAuth()
+    const [userPdf, setUserPdf] = useState()
 
     useEffect(() => {
         axios.get('/v1/users/current-user')
             .then((res) => {
 
                 setUser(res.data.data)
+
 
             })
             .catch((err) => {
@@ -26,6 +30,15 @@ function Dashboard() {
     }, [])
 
 
+
+    useEffect(() => {
+        axios.get("/v1/dashboard/stats")
+            .then((res) => {
+                setUserPdf(res.data.data[0].totalPdf)
+                // console.log(res.data.data[0].totalPdf)
+            })
+            .catch((err) => console.log(err))
+    }, [changeUserDetails])
 
     return (
         <div className=' rounded-lg bg-[#f5f5f5] h-screen p-5'>
@@ -41,7 +54,8 @@ function Dashboard() {
                             <h1 className="text-3xl font-bold">{user?.username}</h1>
                             <p className='text-lg'>{user?.collegeName}</p>
                             <p className='text-lg'>{user?.email}</p>
-                            <p> 0 Notes 0 Projects</p>
+
+                            <p>{userPdf} Notes 0 Projects</p>
                         </div>
                     </div>
 

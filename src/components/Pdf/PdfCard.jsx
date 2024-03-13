@@ -22,7 +22,11 @@ function pdfCard({ p }) {
                         <p className=' font-semibold text-xl text-blue-500'>{p.title}</p>
                     </div>
 
-                    <div className=" line-clamp-4 text-sm bg-[#f5f5f5] rounded-md sm:p-3 p-2">{p.description}</div>
+                    <div className="bg-[#f5f5f5] rounded-md sm:p-3 p-2">
+                        <h1> <span className='text-md font-medium text-black'>Subject : </span>{p?.subject}</h1>
+                        <h1> <span className='text-md font-medium text-black'>Semester : </span>{p?.semester}</h1>
+                        <h1> <span className='text-md font-medium text-black'>Uploaded By : </span>{p?.uploadBy}</h1>
+                    </div>
 
 
 

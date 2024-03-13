@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import useRefreshToken from "../hooks/useRefreshToken.js"
 import useAuth from '../hooks/useAuth.js'
-
+import "../App.css"
 
 
 const PersistLogin = () => {
@@ -33,7 +33,9 @@ const PersistLogin = () => {
         <>
             {
                 isLoading
-                    ? <p>Loading...</p>
+                    ? <div className='flex justify-center  items-center h-screen w-screen'>
+                        <span className="loader "></span>
+                    </div>
                     : <Outlet />
             }
         </>

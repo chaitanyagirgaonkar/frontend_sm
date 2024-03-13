@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
 import axios from "axios"
-
+import toast, { Toaster } from 'react-hot-toast';
 function EditPdf({ onHandleEditNote, pdfId, pdfDetails, onHandleEditPdf }) {
     const [title, setTitle] = useState(pdfDetails?.title);
     const [description, setDescription] = useState(pdfDetails?.description);
@@ -25,12 +25,14 @@ function EditPdf({ onHandleEditNote, pdfId, pdfDetails, onHandleEditPdf }) {
                 {
                     headers: { "Content-Type": "multipart/form-data" }
                 })
-            console.log(res.data.data)
+            // console.log(res.data.data)
             setPdf(res.data.data)
+            toast.success("Note Edited Successfully !")
 
-            onHandleEditPdf();
-
-            onHandleEditNote(a)
+            setTimeout(() => {
+                onHandleEditPdf();
+                onHandleEditNote(a)
+            }, 2000);
         } catch (err) {
             console.log(err);
         }
@@ -105,7 +107,7 @@ function EditPdf({ onHandleEditNote, pdfId, pdfDetails, onHandleEditPdf }) {
                                     type="file"
                                     className="border border-gray-300 rounded-md px-2 py-1  focus:outline-none placeholder:text-sm placeholder:text-gray-400"
                                     placeholder="Upload a img for Pdf Thumbnail"
-                                    required
+
                                     accept='image/*'
                                     onChange={(e) => { setThumbnail(e.target.files[0]) }}
                                 />
@@ -117,6 +119,7 @@ function EditPdf({ onHandleEditNote, pdfId, pdfDetails, onHandleEditPdf }) {
 
                     </form>
                 </div>
+                <Toaster />
             </div>
         </div>
 

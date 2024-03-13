@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaEdit, FaEye } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import EditPdf from './EditPdf';
 import ViewPdf from './ViewPdf';
 
@@ -12,13 +12,16 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
     const [editPdf, setEditPdf] = useState(false)
     const [viewPdf, setViewPdf] = useState(false)
 
+
     const handleDelete = async (pdfId) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this Note?');
         if (confirmDelete) {
             try {
                 const response = await axios.delete(`/v1/pdfs/${pdfId}`);
-                onDeletePdf(pdfId); // Update parent state after successful deletion
                 toast.success('Note deleted Successfully !');
+                onDeletePdf(pdfId);
+
+
             } catch (err) {
                 console.log(err);
             }
@@ -28,7 +31,7 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
         setEditPdf(fal)
     }
     const handleEditPdf = () => {
-        onEditPdf(); // Call the callback function with edited PDF
+        onEditPdf();
         setEditPdf(false);
     };
 
@@ -73,6 +76,7 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
                 viewPdf &&
                 <ViewPdf pdfId={p?._id} onHandleViewNote={handleViewNote} />
             }
+            <Toaster />
         </div>
     );
 }

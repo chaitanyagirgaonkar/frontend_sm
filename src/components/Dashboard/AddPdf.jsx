@@ -26,10 +26,14 @@ function AddPdf({ onHandleAddNote, onPdfAdded }) {
                 {
                     headers: { "Content-Type": "multipart/form-data" }
                 })
-            console.log(res)
+            // console.log(res)
+            toast.success("Note Added Successfully !", 2000)
+
             onHandleAddNote(a)
             onPdfAdded(res.data.data)
-            toast.success("Note Added Successfully !")
+
+
+
         } catch (err) {
             console.log(err);
         }
