@@ -51,20 +51,20 @@ function DashboardPdfCard({ p, onDeletePdf, onEditPdf }) {
 
 
     return (
-        <div className="w-[80%] border rounded-lg m-auto">
+        <div className="w-[80%] border rounded-lg m-auto cursor-pointer ">
             <div className="flex items-center justify-center p-2">
                 <h2 className="text-blue-500 text-xl font-semibold">{p.title}</h2>
             </div>
             <img src={p?.coverImage?.url} alt="" className="" />
             <div className="flex p-2 justify-center items-center gap-5 text-blue-500">
                 <div>
-                    <FaEdit size={30} className="cursor-pointer" onClick={() => setEditPdf(true)} />
+                    <FaEdit size={30} className="cursor-pointer hover:text-blue-700" onClick={() => setEditPdf(true)} />
                 </div>
                 <div>
-                    <FaEye size={30} className="cursor-pointer" onClick={() => setViewPdf(true)} />
+                    <FaEye size={30} className="cursor-pointer hover:text-blue-700" onClick={() => setViewPdf(true)} />
                 </div>
                 <div>
-                    <MdDeleteOutline size={30} className="cursor-pointer" onClick={() => handleDelete(p?._id)} />
+                    <MdDeleteOutline size={30} className="cursor-pointer hover:text-blue-700" onClick={() => handleDelete(p?._id)} />
                 </div>
             </div>
 

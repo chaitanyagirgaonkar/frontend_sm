@@ -35,7 +35,7 @@ function User() {
     return (
         <>
             {user.username ? (
-                <div className="bg-white border border-blue-500 rounded-xl  p-3  m-3 relative">
+                <div className="bg-white border border-blue-500 rounded-xl  p-3  m-3 relative shadow-lg">
                     <div className="flex flex-col justify-center items-center gap-3">
                         <FaUserCircle className="text-blue-500" size={34} />
                         <div className="flex flex-col justify-center items-center gap-1">

@@ -4,6 +4,7 @@ import { useNavigate, useLocation, Outlet, Link } from "react-router-dom"
 import axios from "axios"
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { FaEdit } from "react-icons/fa";
+import toast, { Toaster } from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 
 function Dashboard() {
@@ -14,6 +15,7 @@ function Dashboard() {
     const location = useLocation
     const { changeUserDetails } = useAuth()
     const [userPdf, setUserPdf] = useState()
+    const [userProject, setUserProject] = useState()
 
     useEffect(() => {
         axios.get('/v1/users/current-user')
@@ -34,8 +36,8 @@ function Dashboard() {
     useEffect(() => {
         axios.get("/v1/dashboard/stats")
             .then((res) => {
-                setUserPdf(res.data.data[0].totalPdf)
-                // console.log(res.data.data[0].totalPdf)
+                setUserPdf(res.data.data.userPdf[0].totalPdf)
+                setUserProject(res.data.data.userProject[0].totalProject)
             })
             .catch((err) => console.log(err))
     }, [changeUserDetails])
@@ -55,7 +57,7 @@ function Dashboard() {
                             <p className='text-lg'>{user?.collegeName}</p>
                             <p className='text-lg'>{user?.email}</p>
 
-                            <p>{userPdf} Notes 0 Projects</p>
+                            <p>{userPdf} Notes {userProject} Projects</p>
                         </div>
                     </div>
 
@@ -72,6 +74,7 @@ function Dashboard() {
 
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 }

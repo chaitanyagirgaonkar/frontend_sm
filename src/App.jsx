@@ -13,6 +13,10 @@ import PersistLogin from './components/PersistLogin.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import UserPdf from './components/Dashboard/UserPdf.jsx'
 import UserProject from "./components/Dashboard/UserProject.jsx"
+import ProjectOne from './components/Project/ProjectOne.jsx'
+
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 function App() {
@@ -20,6 +24,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+
         <Routes>
           <Route element={<PersistLogin />}>
             <Route path="/" element={<Home />} />
@@ -32,10 +37,12 @@ function App() {
               <Route path="/container" element={<Container />}>
                 <Route path='pdf/:pdfId' element={<PdfOne />} />
                 <Route path="all-pdf" element={<AllPdf />} />
+                <Route path='project/:projectId' element={<ProjectOne />} />
                 <Route path="all-project" element={<AllProject />} />
                 <Route path="dashboard" element={<Dashboard />} >
                   <Route index element={<UserPdf />} />
                   <Route path='user-project' element={<UserProject />} />
+
                 </Route>
               </Route>
             </Route>
@@ -43,7 +50,9 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+      <Toaster />
     </AuthProvider>
+
   )
 }
 
